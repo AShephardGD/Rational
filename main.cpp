@@ -42,54 +42,54 @@ Rational Rational::inv() {
 
 
 
-Rational Rational::sum(Rational other) {
-    int newNumerator = (numerator * other.denumerator) + (other.numerator * denumerator),
-        newDenumerator = denumerator * other.denumerator;
+Rational Rational::sum(const Rational Other) {
+    int newNumerator = (numerator * Other.denumerator) + (Other.numerator * denumerator),
+        newDenumerator = denumerator * Other.denumerator;
     return Rational(newNumerator, newDenumerator).reduce();
 }
 
-Rational Rational::sub(Rational other) {
-    int newNumerator = (numerator * other.denumerator) - (other.numerator * denumerator),
-        newDenumerator = denumerator * other.denumerator;
+Rational Rational::sub(const Rational Other) {
+    int newNumerator = (numerator * Other.denumerator) - (Other.numerator * denumerator),
+        newDenumerator = denumerator * Other.denumerator;
     return Rational(newNumerator, newDenumerator).reduce();
 }
 
-Rational Rational::mul(Rational other) {
-    int newNumerator = numerator * other.numerator,
-        newDenumerator = denumerator * other.denumerator;
+Rational Rational::mul(const Rational Other) {
+    int newNumerator = numerator * Other.numerator,
+        newDenumerator = denumerator * Other.denumerator;
     return Rational(newNumerator, newDenumerator).reduce();
 }
 
-Rational Rational::div(Rational other) {
-    int newNumerator = numerator * other.denumerator,
-        newDenumerator = denumerator * other.numerator;
+Rational Rational::div(const Rational Other) {
+    int newNumerator = numerator * Other.denumerator,
+        newDenumerator = denumerator * Other.numerator;
     return Rational(newNumerator, newDenumerator).reduce();
 }
 
 
 
-bool Rational::eq(Rational other) {
-    return (numerator * other.denumerator == other.numerator * denumerator) && nan && other.nan;
+bool Rational::eq(const Rational Other) {
+    return (numerator * Other.denumerator == Other.numerator * denumerator) && !nan && !Other.nan;
 }
 
-bool Rational::neq(Rational r) {
-    return !eq(r);
+bool Rational::neq(const Rational Other) {
+    return !eq(Other);
 }
 
-bool Rational::l(Rational other) {
-    return (numerator * other.denumerator < other.numerator * denumerator);
+bool Rational::l(const Rational Other) {
+    return (numerator * Other.denumerator < Other.numerator * denumerator);
 }
 
-bool Rational::leq(Rational other) {
-    return (numerator * other.denumerator <= other.numerator * denumerator);
+bool Rational::leq(const Rational Other) {
+    return (numerator * Other.denumerator <= Other.numerator * denumerator);
 }
 
-bool Rational::g(Rational other) {
-    return (numerator * other.denumerator > other.numerator * denumerator);
+bool Rational::g(const Rational Other) {
+    return (numerator * Other.denumerator > Other.numerator * denumerator);
 }
 
-bool Rational::geq(Rational other) {
-    return (numerator * other.denumerator >= other.numerator * denumerator);
+bool Rational::geq(const Rational Other) {
+    return (numerator * Other.denumerator >= Other.numerator * denumerator);
 }
 
 
@@ -111,6 +111,72 @@ void Rational::scan() {
 }
 
 
+
+Rational Rational::operator+(const Rational Other) {
+    return sum(Other);
+}
+
+Rational Rational::operator-(const Rational Other) {
+    return sub(Other);
+}
+
+Rational Rational::operator*(const Rational Other) {
+    return mul(Other);
+}
+
+Rational Rational::operator/(const Rational Other) {
+    return div(Other);
+}
+
+void Rational::operator=(const Rational Other) {
+    numerator = Other.numerator;
+    denumerator = Other.denumerator;
+}
+
+void Rational::operator+=(const Rational Other) {
+    Rational temp = sum(Other);
+    numerator = temp.numerator;
+    denumerator = temp.denumerator;
+}
+
+void Rational::operator-=(const Rational Other) {
+    Rational temp = sub(Other);
+    numerator = temp.numerator;
+    denumerator = temp.denumerator;
+}
+
+void Rational::operator*=(const Rational Other) {
+    Rational temp = mul(Other);
+    numerator = temp.numerator;
+    denumerator = temp.denumerator;
+}
+
+void Rational::operator/=(const Rational Other) {
+    Rational temp = div(Other);
+    numerator = temp.numerator;
+    denumerator = temp.denumerator;
+}
+
+bool Rational::operator==(const Rational Other) {
+    return eq(Other);
+}
+
+bool Rational::operator<(const Rational Other) {
+    return l(Other);
+}
+
+bool Rational::operator<=(const Rational Other) {
+    return leq(Other);
+}
+
+bool Rational::operator>(const Rational Other) {
+    return g(Other);
+}
+
+bool Rational::operator>=(const Rational Other) {
+    return geq(Other);
+}
+
 int main() {
     setlocale(LC_ALL, "Russian");
     Rational x;        // 1/1
@@ -128,12 +194,12 @@ int main() {
     n.print();
 
     std::cout << std::endl;
-
+    /*
     x.scan();
     std::cout << std::endl;
     std::cout << "new x = ";
     x.print();
-
+    */
     std::cout << std::endl;
 
     std::cout << "z.neg(): ";
@@ -143,18 +209,12 @@ int main() {
 
     std::cout << std::endl;
 
-    std::cout << "x == y: ";
-    std::cout << x.eq(y) << std::endl;
-    std::cout << "y != z: ";
-    std::cout << y.neq(z) << std::endl;
-    std::cout << "x < y: ";
-    std::cout << x.l(y) << std::endl;
-    std::cout << "y <= z: ";
-    std::cout << y.leq(z) << std::endl;
-    std::cout << "x > y: ";
-    std::cout << x.g(y) << std::endl;
-    std::cout << "y >= z: ";
-    std::cout << y.geq(z) << std::endl;
+    std::cout << "x == y: " << x.eq(y) << std::endl;
+    std::cout << "y != z: " << y.neq(z) << std::endl;
+    std::cout << "x < y: " << x.l(y) << std::endl;
+    std::cout << "y <= z: " << y.leq(z) << std::endl;
+    std::cout << "x > y: " << x.g(y) << std::endl;
+    std::cout << "y >= z: " << y.geq(z) << std::endl;
 
     std::cout << std::endl;
 
@@ -174,4 +234,40 @@ int main() {
     x.div(y).print();
     std::cout << "y / z: ";
     y.div(z).print();
+
+    std::cout << std::endl;
+
+    std::cout << "x + y: ";
+    (x + y).print();
+    std::cout << "y - z: ";
+    (y - z).print();
+    std::cout << "x * y: ";
+    (x * y).print();
+    std::cout << "y / z: ";
+    (y / z).print();
+
+    std::cout << std::endl;
+
+    std::cout << "x = y => new x = ";
+    x = y;
+    x.print();
+    std::cout << "x += z => new x = ";
+    x += z;
+    x.print();
+    std::cout << "x -= y => new x = ";
+    x -= y;
+    x.print();
+    std::cout << "x *= y => new x = ";
+    x *= y;
+    x.print();
+    std::cout << "x /= z => new x = ";
+    x /= z;
+    x.print();
+
+    std::cout << std::endl;
+    std::cout << "x == y: " << (x == y) << std::endl;
+    std::cout << "x < z: " << (x < z) << std::endl;
+    std::cout << "x <= y: " << (x <= y) << std::endl;
+    std::cout << "x > z: " << (x > z) << std::endl;
+    std::cout << "x >= y: " << (x >= y) << std::endl;
 }

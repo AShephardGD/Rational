@@ -13,30 +13,45 @@ public:
     Rational neg();
     Rational inv();
 
-    Rational sum(Rational);
-    Rational sub(Rational);
-    Rational mul(Rational);
-    Rational div(Rational);
+    Rational sum(const Rational);
+    Rational sub(const Rational);
+    Rational mul(const Rational);
+    Rational div(const Rational);
 
     // ==
-    bool eq(Rational);//
+    bool eq(const Rational);//
     // !=
-    bool neq(Rational);//
+    bool neq(const Rational);//
     // less than
     // <
-    bool l(Rational);
+    bool l(const Rational);
     // less or equal than
     // <=
-    bool leq(Rational);
+    bool leq(const Rational);
     // greater than
     // >
-    bool g(Rational);
+    bool g(const Rational);
     // greater or equal than
     // >=
-    bool geq(Rational);
+    bool geq(const Rational);
 
     void print();
     void scan();
+
+    Rational operator+(const Rational);
+    Rational operator-(const Rational);
+    Rational operator*(const Rational);
+    Rational operator/(const Rational);
+    void operator=(const Rational);
+    void operator+=(const Rational);
+    void operator-=(const Rational);
+    void operator*=(const Rational);
+    void operator/=(const Rational);
+    bool operator==(const Rational);
+    bool operator<(const Rational);
+    bool operator<=(const Rational);
+    bool operator>(const Rational);
+    bool operator>=(const Rational);
 
 private:
     bool nan;
