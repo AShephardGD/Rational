@@ -77,19 +77,19 @@ bool Rational::neq(const Rational Other) {
 }
 
 bool Rational::l(const Rational Other) {
-    return (numerator * Other.denumerator < Other.numerator * denumerator);
+    return (numerator * Other.denumerator < Other.numerator * denumerator) && !nan && !Other.nan;
 }
 
 bool Rational::leq(const Rational Other) {
-    return (numerator * Other.denumerator <= Other.numerator * denumerator);
+    return (numerator * Other.denumerator <= Other.numerator * denumerator) && !nan && !Other.nan;
 }
 
 bool Rational::g(const Rational Other) {
-    return (numerator * Other.denumerator > Other.numerator * denumerator);
+    return (numerator * Other.denumerator > Other.numerator * denumerator) && !nan && !Other.nan;
 }
 
 bool Rational::geq(const Rational Other) {
-    return (numerator * Other.denumerator >= Other.numerator * denumerator);
+    return (numerator * Other.denumerator >= Other.numerator * denumerator) && !nan && !Other.nan;
 }
 
 
