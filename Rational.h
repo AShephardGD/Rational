@@ -1,3 +1,5 @@
+#include <iostream>
+
 /**
  * ִנמבü, x/y
  */
@@ -35,8 +37,8 @@ public:
     // >=
     bool geq(const Rational);
 
-    void print();
-    void scan();
+    void print(std::ostream& stream = std::cout) const;
+    void scan(std::istream& in = std::cin, std::ostream& out = std::cout);
 
     Rational operator+(const Rational);
     Rational operator-(const Rational);
@@ -55,8 +57,8 @@ public:
     bool operator>(const Rational);
     bool operator>=(const Rational);
 
-    friend ostream& operator<<(ostream& stream, const Rational& rational);
-    friend istream& operator>>(istream& stream, const Rational& rational);
+    friend std::ostream& operator<<(std::ostream& stream, const Rational& rational);
+    friend std::istream& operator>>(std::istream& stream, const Rational& rational);
 
 private:
     bool nan;

@@ -94,7 +94,7 @@ bool Rational::geq(const Rational Other) {
 
 
 
-void Rational::print(ostream& stream = std::cout) {
+void Rational::print(std::ostream& stream) const {
     if(nan) {
         stream << "<NAN>" << std::endl;
     }
@@ -103,7 +103,7 @@ void Rational::print(ostream& stream = std::cout) {
     }
 }
 
-void Rational::scan(istream& in = std::cin, ostream& out = std::cout) {
+void Rational::scan(std::istream& in, std::ostream& out) {
     out << "¬ведите числитель: ";
     in >> numerator;
     out << "¬ведите знаменатель: ";
@@ -116,13 +116,13 @@ void Rational::scan(istream& in = std::cin, ostream& out = std::cout) {
     }
 }
 
-ostream& operator<<(ostream& stream, const Rational& rational) {
+std::ostream& operator<<(std::ostream& stream, const Rational& rational) {
     rational.print(stream);
     return stream;
 }
 
-istream& operator>>(istream& stream, const Rational& rational) {
-    rational.scan(std::cout, stream);
+std::istream& operator>>(std::istream& stream, Rational& rational) {
+    rational.scan(stream, std::cout);
     return stream;
 }
 
@@ -208,12 +208,12 @@ int main() {
     n.print();
 
     std::cout << std::endl;
-    /*
+
     x.scan();
     std::cout << std::endl;
     std::cout << "new x = ";
     x.print();
-    */
+
     std::cout << std::endl;
 
     std::cout << "z.neg(): ";
