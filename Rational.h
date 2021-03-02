@@ -42,16 +42,21 @@ public:
     Rational operator-(const Rational);
     Rational operator*(const Rational);
     Rational operator/(const Rational);
+
     void operator=(const Rational);
     void operator+=(const Rational);
     void operator-=(const Rational);
     void operator*=(const Rational);
     void operator/=(const Rational);
+
     bool operator==(const Rational);
     bool operator<(const Rational);
     bool operator<=(const Rational);
     bool operator>(const Rational);
     bool operator>=(const Rational);
+
+    friend ostream& operator<<(ostream& stream, const Rational& rational);
+    friend istream& operator>>(istream& stream, const Rational& rational);
 
 private:
     bool nan;

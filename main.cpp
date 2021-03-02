@@ -94,23 +94,37 @@ bool Rational::geq(const Rational Other) {
 
 
 
-void Rational::print() {
+void Rational::print(ostream& stream = std::cout) {
     if(nan) {
-        std::cout << "<NAN>" << std::endl;
+        stream << "<NAN>" << std::endl;
     }
     else {
-        std::cout << numerator << "/" << denumerator << std::endl;
+        stream << numerator << "/" << denumerator << std::endl;
     }
 }
 
-void Rational::scan() {
-    std::cout << "¬ведите числитель: ";
-    std::cin >> numerator;
-    std::cout << "¬ведите знаменатель: ";
-    std::cin >> denumerator;
+void Rational::scan(istream& in = std::cin, ostream& out = std::cout) {
+    out << "¬ведите числитель: ";
+    in >> numerator;
+    out << "¬ведите знаменатель: ";
+    in >> denumerator;
+    if (!denumerator) {
+        nan = true;
+    }
+    else {
+        nan = false;
+    }
 }
 
+ostream& operator<<(ostream& stream, const Rational& rational) {
+    rational.print(stream);
+    return stream;
+}
 
+istream& operator>>(istream& stream, const Rational& rational) {
+    rational.scan(std::cout, stream);
+    return stream;
+}
 
 Rational Rational::operator+(const Rational Other) {
     return sum(Other);
